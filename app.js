@@ -11,14 +11,18 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(authenticate);
+// app.use(authenticate);
 
 connectDB();
 
 app.use('/api/v1',statusRoute);
 
-app.get('/admin/get/status',statusRoute);
-app.patch('/admin/update/status',statusRoute);
+app.get('/', (req, res) => {
+    res.send('Welcome to the Status API');
+});
+
+app.get('/admin/get/status',statusRoute,authenticate);
+app.patch('/admin/update/status',statusRoute,authenticate);
   
 
 
