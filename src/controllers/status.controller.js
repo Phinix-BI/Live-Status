@@ -24,13 +24,7 @@ import Status from "../models/status.model.js";
     }
 
    
-    const updatedStatus = await Status.updateOne({}, { status : status }, (err, res) => {
-        if (err) {
-            console.log(err);
-        }else {
-            console.log('Document updated successfully');
-        }
-    });
+    const updatedStatus = await Status.updateOne({}, { status : status });
    
     res.status(200).json(updatedStatus);
 }
