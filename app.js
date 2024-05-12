@@ -17,7 +17,7 @@ connectDB();
 
 app.use('/api/v1',statusRoute);
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to the Status API');
 });
 
