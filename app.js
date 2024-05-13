@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import statusRoute from './src/routers/statusRoute.js';
+import apiKeyRoute from './src/routers/apiKeyRoute.js';
 import connectDB from './src/db/index.js';
 import 'dotenv/config';
 import authenticate from './src/middleware/auth.js';
@@ -16,6 +17,8 @@ app.use(cors());
 connectDB();
 
 app.use('/api/v1',statusRoute);
+app.use('/api/v2',apiKeyRoute);
+
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Status API');
@@ -23,6 +26,8 @@ app.get('/', (req, res) => {
 
 app.get('/admin/get/status',statusRoute,authenticate);
 app.patch('/admin/update/status',statusRoute,authenticate);
+
+app.get('/user/get/apikey',apiKeyRoute);
   
 
 

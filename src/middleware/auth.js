@@ -1,8 +1,12 @@
-const secretToken = process.env.MY_SECRET_KEY;
 
- const authenticate = (req, res, next) => {
+import Status from "../models/status.model.js";
+ const authenticate = async(req, res, next) => {
+
     const token = req.headers['x-access-token'];
-    if (token === secretToken) {
+
+    const tokenExists = await Status.findOne({apiKey:token});
+
+    if (token === tokenExists.apiKey) {
         next();
     } else {
         res.status(401).send('Unauthorized');
